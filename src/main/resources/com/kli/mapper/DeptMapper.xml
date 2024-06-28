@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kli.mapper.DeptMapper">
+    <sql id="querySql">
+        select id,name,create_time,update_time
+        from dept
+    </sql>
+
+    <sql id="insertSql">
+        insert into dept (name,create_time,update_time)
+        values
+    </sql>
+
+    <insert id="insert">
+        <include refid="insertSql"/>
+         (
+            #{name},
+            now(),
+            now()
+        )
+    </insert>
+    <update id="update">
+        update dept
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            update_time = now()
+        </set>
+         where id = #{id}
+    </update>
+    <delete id="delete">
+        delete from dept where id = #{id}
+    </delete>
+
+    <select id="query" resultType="com.kli.pojo.Dept">
+        <include refid="querySql"/>
+        <where>
+            <if test="id != null">
+                id = #{id}
+            </if>
+            <if test="name != null">
+                and name like concat('%',#{name},'%')
+            </if>
+        </where>
+        order by update_time desc
+    </select>
+    <select id="queryById" resultType="com.kli.pojo.Dept">
+        <include refid="querySql"/>
+        where id = #{id}
+    </select>
+</mapper>
