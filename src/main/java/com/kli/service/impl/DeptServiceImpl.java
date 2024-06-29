@@ -1,13 +1,11 @@
 package com.kli.service.impl;
 
 import com.kli.mapper.DeptMapper;
-import com.kli.mapper.EmpMapper;
 import com.kli.pojo.Dept;
-import com.kli.pojo.Emp;
 import com.kli.service.DeptService;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 
@@ -18,7 +16,7 @@ public class DeptServiceImpl implements DeptService {
     @Override
     public boolean insert(Dept dept) {
         List<Dept> depts = query(dept);
-        if(!CollectionUtils.isEmpty(depts)){
+        if(CollectionUtils.isNotEmpty(depts)){
             return false;
         }
         deptMapper.insert(dept);
@@ -38,7 +36,7 @@ public class DeptServiceImpl implements DeptService {
     @Override
     public boolean update(Dept dept) {
         List<Dept> query = queryByName(dept.getName());
-        if(!CollectionUtils.isEmpty(query)){
+        if(CollectionUtils.isNotEmpty(query)){
             if(!dept.getId().equals(query.get(0).getId())){
                 return false;
             }

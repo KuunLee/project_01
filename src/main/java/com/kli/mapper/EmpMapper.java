@@ -3,6 +3,7 @@ package com.kli.mapper;
 import com.kli.pojo.Emp;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.time.LocalDate;
 import java.util.List;
 @Mapper
 public interface EmpMapper {
@@ -16,4 +17,8 @@ public interface EmpMapper {
     void delete(Integer id);
 
     Emp queryById(Integer id);
+
+    List<Emp> list(String name, Short gender, LocalDate begin,LocalDate end);
+
+    void deleteByIds(List<Integer> ids);
 }

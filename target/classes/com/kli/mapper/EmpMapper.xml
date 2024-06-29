@@ -22,15 +22,16 @@
         <if test="deptId != null">
             dept_id,
         </if>
-            create_time,update_time) values
+        create_time,update_time) values
     </sql>
 
+<!--    新增员工-->
     <insert id="insert">
         <include refid="insertSql"/>
-         (
-            #{username},
-            #{name},
-            #{gender},
+        (
+        #{username},
+        #{name},
+        #{gender},
         <if test="image != null">
             #{image},
         </if>
@@ -43,10 +44,12 @@
         <if test="deptId != null">
             #{deptId},
         </if>
-            now(),
-            now()
+        now(),
+        now()
         )
     </insert>
+
+<!--    更新员工信息-->
     <update id="update">
         update emp
         <set>
@@ -76,12 +79,23 @@
             </if>
             update_time = now()
         </set>
-         where id = #{id}
+        where id = #{id}
     </update>
+
+<!--    删除单个员工-->
     <delete id="delete">
         delete from emp where id = #{id}
     </delete>
 
+<!--    批量删除员工-->
+    <delete id="deleteByIds">
+        delete from emp where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+<!--    查询员工-->
     <select id="query" resultType="com.kli.pojo.Emp">
         <include refid="querySql"/>
         <where>
@@ -106,8 +120,33 @@
         </where>
         order by update_time desc
     </select>
+
+<!--    查询员工详情-->
     <select id="queryById" resultType="com.kli.pojo.Emp">
         <include refid="querySql"/>
         where id = #{id}
+    </select>
+
+<!--    条件分页查询-->
+    <select id="list" resultType="com.kli.pojo.Emp">
+        <include refid="querySql"/>
+        <where>
+            <if test="name != null and name != ''">
+                name like concat('%',#{name},'%')
+            </if>
+            <if test="gender != null">
+                and gender = #{gender}
+            </if>
+            <if test="begin != null and end != null">
+                and entrydate between #{begin} and #{end}
+            </if>
+            <if test="begin != null and end == null">
+                and entrydate &gt;= #{begin}
+            </if>
+            <if test="begin == null and end != null">
+                and entrydate &lt;= #{end}
+            </if>
+        </where>
+        order by update_time desc
     </select>
 </mapper>

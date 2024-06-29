@@ -4,16 +4,19 @@ import com.kli.pojo.Emp;
 import com.kli.pojo.PageBean;
 import com.kli.qo.EmpQO;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface EmpService {
-    boolean insert(Emp emp);
+    boolean save(Emp emp);
 
-    boolean delete(Integer id);
+    void deleteByIds(List<Integer> ids);
 
-    void update(Emp emp);
+    boolean update(Emp emp);
 
-    PageBean queryWithPage(EmpQO empQO);
+    List<Emp> query(Emp emp);
 
-    PageBean list(Integer page, Integer pageSize);
+    PageBean page(Integer page, Integer pageSize,String name, Short gender, LocalDate begin,LocalDate end);
+
+    Emp queryInfoById(Integer id);
 }
