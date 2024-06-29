@@ -66,7 +66,6 @@ public class EmpServiceImpl implements EmpService {
                 }
             }
         }
-
         empMapper.update(emp);
         return true;
     }
