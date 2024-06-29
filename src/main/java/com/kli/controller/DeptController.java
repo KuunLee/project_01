@@ -27,7 +27,7 @@ public class DeptController {
         boolean result = deptService.insert(dept);
         if(!result){
             log.warn("数据已存在，不执行插入操作");
-            return Result.error("数据已存在，不执行插入操作");
+            return Result.error("部门名称重复");
         }
         return Result.success();
     }
