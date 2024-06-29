@@ -61,7 +61,7 @@ public class EmpServiceImpl implements EmpService {
         //如果通过传参用户名可以查询到数据,再判断传参的ID和查询到的数据的ID是否一样，如果不一样，则代表不是同一个数据，此时将用户名修改为相同则返回失败
         if(CollectionUtils.isNotEmpty(emps)){
             for (Emp employee : emps) {
-                if(employee.getId().compareTo(emp.getId()) == 0){
+                if(!(employee.getId().compareTo(emp.getId()) == 0)){
                     return false;
                 }
             }
