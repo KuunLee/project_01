@@ -122,7 +122,6 @@ public class EmpServiceImpl implements EmpService {
         pageBean.setTotal(result.getTotal());
         pageBean.setRows(result.getResult());
         return pageBean;
-
     }
 
     @Override
@@ -131,7 +130,6 @@ public class EmpServiceImpl implements EmpService {
         emp.setId(id);
         List<Emp> emps = query(emp);
         if(CollectionUtils.isEmpty(emps)){
-            log.error("未查询到数据,id为：{}",id);
             return null;
         }
         return emps.get(0);

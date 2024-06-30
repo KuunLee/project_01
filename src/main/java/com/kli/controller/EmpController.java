@@ -39,6 +39,7 @@ public class EmpController {
         boolean result = empService.save(emp);
         if(!result){
             log.warn("数据已存在，不执行插入操作");
+            return Result.error("用户名重复");
         }
         return Result.success();
     }
@@ -105,7 +106,8 @@ public class EmpController {
         log.info("开始查询员工详情信息,id：{}",id);
         Emp emp = empService.queryInfoById(id);
         if(emp == null){
-            return Result.error("未查询到数据，请检查参数");
+            log.error("未查询到数据，请检查参数，id为：{}",id);
+            return Result.error("该id的数据不存在");
         }
         return Result.success(emp);
     }
