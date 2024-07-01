@@ -2,6 +2,7 @@ package com.kli.controller;
 
 import com.kli.pojo.Dept;
 import com.kli.pojo.Result;
+import com.kli.qo.EmpQO;
 import com.kli.service.DeptService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -18,15 +19,15 @@ public class DeptController {
     @PostMapping
     public Result insert(@RequestBody Dept dept){
         if(dept == null){
-            log.error("参数不能为空");
+            log.error("参数不能为空：{}",dept);
             return Result.error("参数不能为空");
         } else if (StringUtils.isBlank(dept.getName())) {
-            log.error("部门名称不能为空");
+            log.error("部门名称不能为空,传递的参数为：{}",dept);
             return Result.error("部门名称不能为空");
         }
         boolean result = deptService.insert(dept);
         if(!result){
-            log.warn("数据已存在，不执行插入操作");
+            log.warn("数据已存在，不执行插入操作，参数为：{}",dept);
             return Result.error("部门名称重复");
         }
         return Result.success();
@@ -45,13 +46,13 @@ public class DeptController {
     @PutMapping
     public Result update(@RequestBody Dept dept){
         if(dept == null){
-            log.error("参数不能为空");
+            log.error("参数不能为空：{}",dept);
             return Result.error("参数不能为空");
         } else if (dept.getId() == null || StringUtils.equals(dept.getId().toString(),"")) {
-            log.error("id不能为空");
+            log.error("id不能为空,传递的参数为：{}",dept);
             return Result.error("id不能为空");
         } else if (StringUtils.isBlank(dept.getName())) {
-            log.error("部门名称不能为空");
+            log.error("部门名称不能为空,传递的参数为：{}",dept);
             return Result.error("部门名称不能为空");
         }
         boolean result = deptService.update(dept);

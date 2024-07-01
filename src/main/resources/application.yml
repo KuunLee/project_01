@@ -1,10 +1,14 @@
 spring:
   #数据库连接信息
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/db01
-    username: root
-    password: abc123
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+    diver-class-name: com.kingbase8.Driver
+#    url: jdbc:mysql://localhost:3306/db01
+    url: dbc:kingbase8://192.168.10.210:54321/ch-project-yu
+#    username: root
+    username: system
+#    password: abc123
+    password: cddpi.com
   #文件上传的配置
   servlet:
     multipart:

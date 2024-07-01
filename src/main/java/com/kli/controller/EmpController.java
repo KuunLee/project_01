@@ -3,6 +3,7 @@ package com.kli.controller;
 import com.kli.pojo.Emp;
 import com.kli.pojo.PageBean;
 import com.kli.pojo.Result;
+import com.kli.qo.EmpQO;
 import com.kli.service.EmpService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -110,5 +111,14 @@ public class EmpController {
             return Result.error("该id的数据不存在");
         }
         return Result.success(emp);
+    }
+
+    @PostMapping("/queryAndPaging")
+    public Result queryAndPaging(@RequestBody EmpQO empQO){
+        if(empQO == null){
+            return Result.error("参数不能为空");
+        }
+        PageBean result = empService.queryAndPaging(empQO);
+        return Result.success(result);
     }
 }

@@ -36,7 +36,7 @@ public class UploadController {
 //    }
 
     public Result upload(MultipartFile image){
-        log.info("文件上传:{}",image);
+        log.info("文件上传:{}",image.getOriginalFilename());
         try {
             String netPath = aliOSSUtils.upload(image);
             return Result.success(netPath);
