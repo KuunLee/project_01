@@ -153,7 +153,7 @@ public class EmpServiceImpl implements EmpService {
             empQO.setData(new Emp());
         }
         //2.设置分页参数
-        PageHelper.startPage(empQO.getPage(), empQO.getPageSize());
+        PageHelper.startPage(empQO.getPage(), empQO.getPageSize(z));
 
         //3.执行查询并将结果转换为page对象
         List<Emp> emps = empMapper.queryPaging(empQO);

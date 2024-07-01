@@ -149,4 +149,39 @@
         </where>
         order by update_time desc
     </select>
+
+<!--    分页查询带所有条件-->
+    <select id="queryPaging" resultType="com.kli.pojo.Emp">
+        <include refid="querySql"></include>
+        <where>
+            <if test="data.id != null">
+                id = #{data.id}
+            </if>
+            <if test="data.name != null">
+                and name like concat('%',#{data.name},'%')
+            </if>
+            <if test="data.username != null">
+                and username = #{data.username}
+            </if>
+            <if test="data.gender != null">
+                and gender = #{data.gender}
+            </if>
+            <if test="data.job != null">
+                and job = #{data.job}
+            </if>
+            <if test="data.deptId != null">
+                and dept_id = #{data.deptId}
+            </if>
+            <if test="beginTime != null and endTime != null">
+                and entryDate between #{beginTime} and #{endTime}
+            </if>
+            <if test="beginTime != null and endTime == null">
+                and entryDate > #{beginTime}
+            </if>
+            <if test="beginTime == null and endTime != null">
+                and entryDate &lt; #{endTime}
+            </if>
+        </where>
+        order by update_time desc
+    </select>
 </mapper>
