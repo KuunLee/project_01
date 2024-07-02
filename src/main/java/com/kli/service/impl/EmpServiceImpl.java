@@ -56,16 +56,6 @@ public class EmpServiceImpl implements EmpService {
         empMapper.deleteByIds(ids);
     }
 
-//    private List<Emp> queryByIds(List<Integer> ids) {
-//        List<Emp> emps = new ArrayList<>();
-//        ids.forEach(id -> {
-//            Emp emp = new Emp();
-//            emp.setId(id);
-//            emps.add(emp);
-//        });
-//        empMapper.deleteByIds(ids);
-//    }
-
     /**
      * 修改员工信息
      * @param emp 修改后的员工信息
@@ -97,9 +87,11 @@ public class EmpServiceImpl implements EmpService {
         if (page == null || StringUtils.isBlank(page.toString())) {
             page = 1;
         }
+
         if (pageSize == null || StringUtils.isBlank(pageSize.toString())) {
             pageSize = 10;
         }
+
         PageHelper.startPage(page, pageSize);
 
         //2.查询
