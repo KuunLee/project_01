@@ -82,11 +82,6 @@
         where id = #{id}
     </update>
 
-<!--    删除单个员工-->
-    <delete id="delete">
-        delete from emp where id = #{id}
-    </delete>
-
 <!--    批量删除员工-->
     <delete id="deleteByIds">
         delete from emp where id in
@@ -119,12 +114,6 @@
             </if>
         </where>
         order by update_time desc
-    </select>
-
-<!--    查询员工详情-->
-    <select id="queryById" resultType="com.kli.pojo.Emp">
-        <include refid="querySql"/>
-        where id = #{id}
     </select>
 
 <!--    条件分页查询-->

@@ -24,4 +24,7 @@ class SpringbootMybatisCrudApplicationTests {
 //        List<Emp> emps = empMapper.query();
 //        emps.forEach(System.out::println);
 //    }
+
+
+
 }

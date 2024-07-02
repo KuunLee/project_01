@@ -26,6 +26,11 @@ public class EmpServiceImpl implements EmpService {
     @Autowired
     private EmpMapper empMapper;
 
+    /**
+     * 新增员工
+     * @param emp 员工信息
+     * @return 是否进行了新增
+     */
     @Override
     public boolean save(Emp emp) {
         Emp query = new Emp();
@@ -42,6 +47,10 @@ public class EmpServiceImpl implements EmpService {
         return empMapper.query(emp);
     }
 
+    /**
+     * 批量删除员工(也可删除单个)
+     * @param ids 删除的员工id列表
+     */
     @Override
     public void deleteByIds(List<Integer> ids) {
         empMapper.deleteByIds(ids);
@@ -57,6 +66,11 @@ public class EmpServiceImpl implements EmpService {
 //        empMapper.deleteByIds(ids);
 //    }
 
+    /**
+     * 修改员工信息
+     * @param emp 修改后的员工信息
+     * @return 是否进行了修改
+     */
     @Override
     public boolean update(Emp emp) {
         Emp query = new Emp();
@@ -65,7 +79,7 @@ public class EmpServiceImpl implements EmpService {
         //如果通过传参用户名可以查询到数据,再判断传参的ID和查询到的数据的ID是否一样，如果不一样，则代表不是同一个数据，此时将用户名修改为相同则返回失败
         if (CollectionUtils.isNotEmpty(emps)) {
             for (Emp employee : emps) {
-                if (!(employee.getId().compareTo(emp.getId()) == 0)) {
+                if (employee.getId().compareTo(emp.getId()) != 0) {
                     return false;
                 }
             }
@@ -102,13 +116,13 @@ public class EmpServiceImpl implements EmpService {
     /**
      * 分页条件查询
      *
-     * @param page
-     * @param pageSize
-     * @param name
-     * @param gender
-     * @param begin
-     * @param end
-     * @return
+     * @param page 页码
+     * @param pageSize 分页数
+     * @param name 姓名
+     * @param gender 性别
+     * @param begin 开始日期(入职日期)
+     * @param end 结束日期(入职日期)
+     * @return 查询结果
      */
     @Override
     public PageBean page(Integer page, Integer pageSize,
@@ -129,6 +143,11 @@ public class EmpServiceImpl implements EmpService {
         return pageBean;
     }
 
+    /**
+     * 查询员工详情
+     * @param id 员工id
+     * @return 员工信息
+     */
     @Override
     public Emp queryInfoById(Integer id) {
         Emp emp = new Emp();
@@ -140,6 +159,11 @@ public class EmpServiceImpl implements EmpService {
         return emps.get(0);
     }
 
+    /**
+     * 分页查询(带所有条件)
+     * @param empQO 分页查询对象
+     * @return 分页查询结果
+     */
     @Override
     public PageBean queryAndPaging(EmpQO empQO) {
         //1.参数校验
@@ -153,7 +177,7 @@ public class EmpServiceImpl implements EmpService {
             empQO.setData(new Emp());
         }
         //2.设置分页参数
-        PageHelper.startPage(empQO.getPage(), empQO.getPageSize(z));
+        PageHelper.startPage(empQO.getPage(), empQO.getPageSize());
 
         //3.执行查询并将结果转换为page对象
         List<Emp> emps = empMapper.queryPaging(empQO);

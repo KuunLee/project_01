@@ -2,7 +2,9 @@ package com.kli.mapper;
 
 import com.kli.pojo.Emp;
 import com.kli.qo.EmpQO;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -15,9 +17,10 @@ public interface EmpMapper {
 
     void update(Emp emp);
 
-
+    @Delete("delete from emp where id = #{id}")
     void delete(Integer id);
 
+    @Select("select * from emp where id = #{id}")
     Emp queryById(Integer id);
 
     List<Emp> list(String name, Short gender, LocalDate begin,LocalDate end);
