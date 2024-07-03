@@ -5,10 +5,9 @@ import com.kli.qo.EmpQO;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
-
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
+
 @Mapper
 public interface EmpMapper {
     List<Emp> query(Emp emp);
@@ -28,4 +27,7 @@ public interface EmpMapper {
     void deleteByIds(List<Integer> ids);
 
     List<Emp> queryPaging(EmpQO empQO);
+
+    @Select("select * from emp where username = #{username} and password = #{password}")
+    Emp queryByUsernameAndPassword(String username, String password);
 }

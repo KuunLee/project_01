@@ -3,16 +3,15 @@ package com.kli.service.impl;
 import com.kli.mapper.DeptMapper;
 import com.kli.pojo.Dept;
 import com.kli.service.DeptService;
-import org.apache.commons.collections4.CollectionUtils;
+import jakarta.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class DeptServiceImpl implements DeptService {
-    @Autowired
+    @Resource
     private DeptMapper deptMapper;
 
     /**

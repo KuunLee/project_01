@@ -5,13 +5,12 @@ import com.kli.pojo.PageBean;
 import com.kli.pojo.Result;
 import com.kli.qo.EmpQO;
 import com.kli.service.EmpService;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
-
 import java.time.LocalDate;
 import java.util.List;
 
@@ -19,7 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/emps")
 public class EmpController {
-    @Autowired
+    @Resource
     private EmpService empService;
     @PostMapping
     public Result save(@RequestBody Emp emp){

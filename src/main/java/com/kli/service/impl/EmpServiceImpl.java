@@ -7,12 +7,11 @@ import com.kli.pojo.Emp;
 import com.kli.pojo.PageBean;
 import com.kli.qo.EmpQO;
 import com.kli.service.EmpService;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -23,7 +22,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 public class EmpServiceImpl implements EmpService {
-    @Autowired
+    @Resource
     private EmpMapper empMapper;
 
     /**
@@ -186,6 +185,17 @@ public class EmpServiceImpl implements EmpService {
         pageBean.setTotal(result.getTotal());
         pageBean.setRows(result.getResult());
         return pageBean;
+    }
+
+    /**
+     * 登录
+     * @param username 用户名
+     * @param password 密码
+     * @return 用户信息
+     */
+    @Override
+    public Emp login(String username, String password) {
+        return empMapper.queryByUsernameAndPassword(username,password);
     }
 
     private Emp queryById(Integer id) {

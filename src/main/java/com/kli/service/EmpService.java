@@ -60,4 +60,12 @@ public interface EmpService {
      * @return
      */
     PageBean queryAndPaging(EmpQO empQO);
+
+    /**
+     * 登录
+     * @param username 用户名
+     * @param password 密码
+     * @return 用户信息
+     */
+    Emp login(String username, String password);
 }

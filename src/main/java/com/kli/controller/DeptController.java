@@ -2,11 +2,10 @@ package com.kli.controller;
 
 import com.kli.pojo.Dept;
 import com.kli.pojo.Result;
-import com.kli.qo.EmpQO;
 import com.kli.service.DeptService;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,7 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/depts")
 public class DeptController {
-    @Autowired
+    @Resource
     private DeptService deptService;
     @PostMapping
     public Result insert(@RequestBody Dept dept){
