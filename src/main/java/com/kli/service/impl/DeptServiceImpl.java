@@ -28,6 +28,7 @@ public class DeptServiceImpl implements DeptService {
                 return false;
             }
         }
+
         deptMapper.insert(dept);
         return true;
     }
@@ -44,6 +45,7 @@ public class DeptServiceImpl implements DeptService {
         if (dept == null) {
             return false;
         }
+
         deptMapper.delete(id);
         return true;
     }
@@ -64,6 +66,7 @@ public class DeptServiceImpl implements DeptService {
                 }
             }
         }
+
         deptMapper.update(dept);
         return true;
     }

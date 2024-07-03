@@ -38,6 +38,7 @@ public class EmpServiceImpl implements EmpService {
         if (CollectionUtils.isNotEmpty(emps)) {
             return false;
         }
+
         empMapper.insert(emp);
         return true;
     }
@@ -73,6 +74,7 @@ public class EmpServiceImpl implements EmpService {
                 }
             }
         }
+
         empMapper.update(emp);
         return true;
     }
@@ -144,10 +146,7 @@ public class EmpServiceImpl implements EmpService {
         Emp emp = new Emp();
         emp.setId(id);
         List<Emp> emps = query(emp);
-        if (CollectionUtils.isEmpty(emps)) {
-            return null;
-        }
-        return emps.get(0);
+        return CollectionUtils.isEmpty(emps) ? null : emps.get(0);
     }
 
     /**
@@ -161,12 +160,15 @@ public class EmpServiceImpl implements EmpService {
         if (empQO.getPage() == null || StringUtils.isBlank(empQO.getPage().toString())) {
             empQO.setPage(1);
         }
+
         if (empQO.getPageSize() == null || StringUtils.isBlank(empQO.getPageSize().toString())) {
             empQO.setPageSize(10);
         }
+
         if (empQO.getData() == null) {
             empQO.setData(new Emp());
         }
+
         //2.设置分页参数
         PageHelper.startPage(empQO.getPage(), empQO.getPageSize());
 
@@ -179,6 +181,7 @@ public class EmpServiceImpl implements EmpService {
             pageBean.setRows(new ArrayList());
             return pageBean;
         }
+
         Page result = (Page) emps;
 
         //4.组装参数

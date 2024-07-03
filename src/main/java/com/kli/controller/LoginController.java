@@ -3,12 +3,17 @@ package com.kli.controller;
 import com.kli.pojo.Emp;
 import com.kli.pojo.Result;
 import com.kli.service.EmpService;
+import com.kli.util.JwtUtils;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
+import java.util.Map;
+
 @Slf4j
 @RestController
 public class LoginController {
@@ -34,6 +39,12 @@ public class LoginController {
             log.warn("账号或密码错误");
             return Result.error("账号或密码错误");
         }
-        return Result.success();
+        //构造jwt令牌
+        Map<String,Object> map = new HashMap<>();
+        map.put("id",result.getId());
+        map.put("username",result.getUsername());
+        map.put("password",result.getPassword());
+        String jwt = JwtUtils.generateJwt(map);
+        return Result.success(jwt);
     }
 }
