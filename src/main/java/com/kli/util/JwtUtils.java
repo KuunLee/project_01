@@ -1,5 +1,6 @@
 package com.kli.util;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
@@ -18,5 +19,11 @@ public class JwtUtils {
                 .setExpiration(new Date(System.currentTimeMillis() + expire))
                 .compact();
         return jwt;
+    }
+
+    public static Claims parseJwt(String jwt){
+        return Jwts.parser().setSigningKey(signKey)
+                .parseClaimsJws(jwt)
+                .getBody();
     }
 }
