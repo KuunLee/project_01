@@ -14,36 +14,17 @@ public class UploadController {
     @Resource
     private AliOSSUtils aliOSSUtils;
 
-     @PostMapping("/upload")
-//    public Result upload(String username, Integer age, MultipartFile image){
-//
-//        log.info("文件上传:{},{},{}",username,age,image);
-//        //uuid作为文件名
-//        UUID uuid = UUID.randomUUID();
-//        //获取到文件全名之后，根据最后1个小数点进行截取，拿到文件后缀
-//        String objectName = image.getOriginalFilename();
-//        int i = objectName.lastIndexOf(".");
-//        String fileType = objectName.substring(i);
-//        String fileUrl = "E:\\images\\" + objectName;
-//        try {
-//            ALiYunUploadUtil.upload(objectName,fileUrl);
-//        }
-//        catch (Exception e){
-//            e.printStackTrace();
-//            return Result.error("上传文件失败");
-//        }
-//        return Result.success(netUrl);
-//    }
-
-    public Result upload(MultipartFile image){
-        log.info("文件上传:{}",image.getOriginalFilename());
+    @PostMapping("/upload")
+    public Result upload(MultipartFile image) {
+        String netPath;
+        log.info("文件上传:{}", image.getOriginalFilename());
         try {
-            String netPath = aliOSSUtils.upload(image);
-            return Result.success(netPath);
-        }
-        catch (Exception e){
+            netPath = aliOSSUtils.upload(image);
+
+        } catch (Exception e) {
             e.printStackTrace();
             return Result.error("上传文件失败");
         }
-     }
+        return Result.success(netPath);
+    }
 }

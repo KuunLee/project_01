@@ -59,6 +59,7 @@ public class DeptServiceImpl implements DeptService {
     @Override
     public boolean update(Dept dept) {
         Dept query = queryByName(dept.getName());
+        //若通过部门名称可以查询到数据，且查询到的和前端传的不是同一个数据，此时修改姓名为相同则返回false不进行修改
         if (query != null) {
             if (dept.getId().compareTo(query.getId()) != 0) {
                 if (StringUtils.equals(dept.getName(), query.getName())) {

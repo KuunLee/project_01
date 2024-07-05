@@ -13,7 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.io.IOException;
 
 @Slf4j
-@WebFilter
+//@WebFilter
 public class LoginCheckFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {

@@ -35,6 +35,7 @@ public class EmpServiceImpl implements EmpService {
         Emp query = new Emp();
         query.setUsername(emp.getUsername());
         List<Emp> emps = query(query);
+        //员工姓名重复则不进行新增
         if (CollectionUtils.isNotEmpty(emps)) {
             return false;
         }

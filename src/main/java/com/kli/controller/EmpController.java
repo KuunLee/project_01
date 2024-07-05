@@ -90,12 +90,6 @@ public class EmpController {
                        String name, Short gender,
                        @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate begin,
                        @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate end){
-//        if (empQO == null){
-//            log.error("参数不能为空");
-//        }
-//        log.info("开始查询分页数据：{},{},{}",empQO.getEmp(),empQO.getPage(),empQO.getPageSize());
-//        PageBean PageBean = empService.queryWithPage(empQO);
-//        return Result.success(PageBean);
         log.info("开始查询分页数据：{},{},{},{},{},{}",page,pageSize,name,gender,begin,end);
         PageBean pageBean = empService.page(page,pageSize,name,gender,begin,end);
         return Result.success(pageBean);
