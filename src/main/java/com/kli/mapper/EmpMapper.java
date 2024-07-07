@@ -30,4 +30,11 @@ public interface EmpMapper {
 
     @Select("select * from emp where username = #{username} and password = #{password}")
     Emp queryByUsernameAndPassword(String username, String password);
+
+    /**
+     * 根据部门id删除员工
+     * @param deptId
+     */
+    @Delete("delete from emp where dept_id = #{deptId}")
+    void deleteByDeptId(Integer deptId);
 }

@@ -25,7 +25,7 @@ public class LoginCheckFilter implements Filter {
 
         //2.如果是登录则不拦截
         if (StringUtils.contains(requestURL, "login")) {
-            log.info("登录操作");
+                log.info("登录操作");
             filterChain.doFilter(servletRequest, servletResponse);
             return;
         }
