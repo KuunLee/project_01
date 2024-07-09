@@ -62,8 +62,6 @@ public class DeptServiceImpl implements DeptService {
         try {
             deptMapper.delete(id);
 
-            int i = 1/0;
-
             empMapper.deleteByDeptId(id);
         }  finally {
             DeptLog deptLog = new DeptLog();

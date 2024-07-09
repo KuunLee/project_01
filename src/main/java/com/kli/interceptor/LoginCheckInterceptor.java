@@ -55,8 +55,10 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
 //        log.info("令牌合法，进行放行操作");
 //        return true;
 
+        //1.获取token
         String token = request.getHeader("token");
 
+        //2.解析，失败则进行拦截
         try{
             JwtUtils.parseJwt(token);
         }
@@ -68,6 +70,7 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
             return false;
         }
 
+        //3.放行
         return true;
     }
 

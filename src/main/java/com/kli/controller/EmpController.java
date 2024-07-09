@@ -35,12 +35,15 @@ public class EmpController {
             log.error("性别不能为空");
             return Result.error("性别不能为空");
         }
+
         log.info("新增员工，信息为：{}",emp);
+
         boolean result = empService.save(emp);
         if(!result){
             log.warn("数据已存在，不执行插入操作");
             return Result.error("用户名重复");
         }
+
         return Result.success();
     }
 
@@ -52,10 +55,7 @@ public class EmpController {
             return Result.error("id参数为空，请检查");
         }
         empService.deleteByIds(ids);
-//        if(!flat){
-//            log.warn("数据不存在，未进行删除操作");
-//            return Result.error("数据不存在，未进行删除操作");
-//        }
+
         return Result.success();
     }
 

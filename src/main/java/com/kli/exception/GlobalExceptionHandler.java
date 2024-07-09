@@ -9,6 +9,13 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public Result ex(Exception e){
         e.printStackTrace();
-        return Result.error("操作失败了，请联系管理员");
+        return Result.error("系统异常，请联系管理员");
     }
+
+//    @ExceptionHandler(IllegalArgumentException.class)
+//    public Result ex(IllegalArgumentException e){
+//        e.printStackTrace();
+//        return Result.error(e.getMessage());
+//    }
+
 }
