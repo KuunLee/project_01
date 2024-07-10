@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kli.mapper.StudentMapper">
+    <sql id="querySql">
+        select id,name,gender,grade,clazz,admission_date,head_teacher_name,create_time,update_time from student
+    </sql>
+    <insert id="insert">
+        insert into student (
+        name,
+        gender,
+        grade,
+        clazz,
+        <if test="admissionDate != null">
+            admission_date,
+        </if>
+        <if test="headTeacherName != null">
+            head_teacher_name,
+        </if>
+        create_time,
+        update_time
+        )
+        values(
+        #{name},
+        #{gender},
+        #{grade},
+        #{clazz},
+        <if test="admissionDate != null">
+            #{admissionDate},
+        </if>
+        <if test="headTeacherName != null">
+            #{headTeacherName},
+        </if>
+        #{createTime},
+        #{updateTime}
+        )
+    </insert>
+    <update id="update">
+        update student
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="gender != null">
+                gender = #{gender},
+            </if>
+            <if test="grade != null">
+                grade = #{grade},
+            </if>
+            <if test="clazz != null">
+                clazz = #{clazz},
+            </if>
+            <if test="admissionDate != null">
+                admission_date = #{admissionDate},
+            </if>
+            <if test="headTeacherName != null and headTeacherName != ''">
+                head_teacher_name = #{headTeacherName}
+            </if>
+            update_time = #{updateTime}
+        </set>
+        where id = #{id}
+    </update>
+
+    <select id="queryList">
+        <include refid="querySql"></include>
+        <where>
+            <if test="name != null and name != ''">
+                name = #{name}
+            </if>
+            <if test="gender != null">
+                and gender = #{gender}
+            </if>
+            <if test="grade != null">
+                and grade = #{grade}
+            </if>
+            <if test="clazz != null">
+                and clazz = #{clazz}
+            </if>
+            <if test="begin != null and end != null">
+                and admission_date between #{begin} and #{end}
+            </if>
+            <if test="begin == null and end != null">
+                and admission_date &lt;= #{end}
+            </if>
+            <if test="begin != null and end == null">
+                and admission_date >= #{begin}
+            </if>
+        </where>
+        order by update_time desc
+    </select>
+</mapper>

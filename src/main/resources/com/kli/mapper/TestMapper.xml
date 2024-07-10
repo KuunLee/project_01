@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kli.mapper.TestMapper">
+
+    <sql id="querySql">
+        select id,username,password,name,gender,image,job,entrydate,dept_id,create_time,update_time
+        from emp
+    </sql>
+
+    <select id="queryEmps">
+        <include refid="querySql"></include>
+        <where>
+            <if test="name != null and name != ''">
+                and name like concat('%',#{name},'%')
+            </if>
+            <if test="gender != null">
+                and gender = #{gender}
+            </if>
+            <if test="startTime != null and endTime != null">
+                and entrydate between #{startTime} and #{endTime}
+            </if>
+            <if test="startTime == null and endTime != null">
+                and entrydate &lt;= #{endTime}
+            </if>
+            <if test="startTime != null and endTime == null">
+                and entrydate >= #{startTime}
+            </if>
+        </where>
+        order by update_time desc
+    </select>
+</mapper>
