@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kli.mapper.ClazzMapper">
+    <insert id="insert">
+        insert into Clazz (
+                           class_rank,
+                           grade,
+                           head_teacher_name,
+                           create_time,
+                           update_time
+        )
+        values(
+                            #{classRank},
+                            #{grade},
+                            #{headTeacherName},
+                            #{createTime},
+                            #{updateTime}
+              )
+    </insert>
+
+    <update id="update">
+        update clazz
+        <set>
+            <if test="classRank != null">
+                class_rank = #{classRank},
+            </if>
+            <if test="grade != null">
+                grade = #{grade},
+            </if>
+            <if test="headTeacherName != null and headTeacherName != ''">
+                head_teacher_name = #{headTeacherName},
+            </if>
+            update_time = #{updateTime}
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteByIds">
+        delete from clazz
+        <where>
+            id in
+            <foreach collection="ids" item="id" separator="," open="(" close=")">
+                #{id}
+            </foreach>
+        </where>
+    </delete>
+
+    <select id="query" resultType="com.kli.pojo.Clazz">
+        select * from clazz
+        <where>
+            <if test="classRank != null">
+                class_rank = #{classRank}
+            </if>
+            <if test="headTeacherName != null and headTeacherName != ''">
+                and head_teacher_name = #{headTeacherName}
+            </if>
+        </where>
+        order by update_time desc
+    </select>
+</mapper>

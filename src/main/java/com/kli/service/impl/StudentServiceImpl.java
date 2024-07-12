@@ -39,9 +39,9 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public boolean delete(Integer id) {
+    public boolean deleteByIds(List<Integer> ids) {
         try {
-            studentMapper.delete(id);
+            studentMapper.deleteByIds(ids);
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -60,5 +60,10 @@ public class StudentServiceImpl implements StudentService {
         student.setCreateTime(LocalDateTime.now());
         student.setUpdateTime(LocalDateTime.now());
         studentMapper.insert(student);
+    }
+
+    @Override
+    public Student queryById(Integer id) {
+        return studentMapper.queryById(id);
     }
 }

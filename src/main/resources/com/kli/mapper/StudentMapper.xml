@@ -61,12 +61,21 @@
         </set>
         where id = #{id}
     </update>
+    <delete id="deleteByIds">
+        delete from student
+        <where>
+            id in
+            <foreach collection="ids" item="id" separator="," open="(" close=")">
+                #{id}
+            </foreach>
+        </where>
+    </delete>
 
     <select id="queryList">
         <include refid="querySql"></include>
         <where>
             <if test="name != null and name != ''">
-                name = #{name}
+                name like concat('%',#{name},'%')
             </if>
             <if test="gender != null">
                 and gender = #{gender}

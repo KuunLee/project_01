@@ -4,6 +4,7 @@ import com.kli.pojo.PageBean;
 import com.kli.pojo.Student;
 
 import java.time.LocalDate;
+import java.util.List;
 
 
 public interface StudentService {
@@ -11,9 +12,11 @@ public interface StudentService {
                   String headTeacherName, LocalDate begin,LocalDate end,
                   Integer page, Integer pageSize);
 
-    boolean delete(Integer id);
+    boolean deleteByIds(List<Integer> ids);
 
     void update(Student student);
 
     void insert(Student student);
+
+    Student queryById(Integer id);
 }

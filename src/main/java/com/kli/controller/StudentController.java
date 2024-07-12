@@ -6,11 +6,13 @@ import com.kli.pojo.Student;
 import com.kli.service.StudentService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -30,15 +32,15 @@ public class StudentController {
             log.error("姓名不能为空：{}",student);
             return Result.error("姓名不能为空");
         }
-        else if(StringUtils.isBlank(student.getGender().toString())){
+        else if(student.getGender() == null){
             log.error("性别不能为空：{}",student);
             return Result.error("性别不能为空");
         }
-        else if(StringUtils.isBlank(student.getGrade().toString())){
+        else if(student.getGrade() == null){
             log.error("年级不能为空：{}",student);
             return Result.error("年级不能为空");
         }
-        else if(StringUtils.isBlank(student.getClazz().toString())){
+        else if(student.getClazz() == null){
             log.error("班级不能为空：{}",student);
             return Result.error("班级不能为空");
         }
@@ -46,9 +48,9 @@ public class StudentController {
         return Result.success();
     }
 
-    @DeleteMapping("/{id}")
-    public Result delete(@PathVariable Integer id){
-        boolean res = studentService.delete(id);
+    @DeleteMapping("/{ids}")
+    public Result delete(@PathVariable List<Integer> ids){
+        boolean res = studentService.deleteByIds(ids);
         if(!res){
             log.error("删除失败");
             return Result.error("删除失败");
@@ -71,5 +73,11 @@ public class StudentController {
                        @RequestParam(defaultValue = "10") Integer pageSize){
         PageBean res = studentService.list(name,gender,grade,clazz,headTeacherName,begin,end,page,pageSize);
         return Result.success(res);
+    }
+
+    @GetMapping("/{id}")
+    public Result queryInfoById(@PathVariable Integer id){
+        Student student = studentService.queryById(id);
+        return Result.success(student);
     }
 }
