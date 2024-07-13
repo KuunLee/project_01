@@ -1,6 +1,6 @@
 package com.kli.controller;
 
-import com.kli.pojo.Result;
+import com.kli.dbo.Result;
 import com.kli.util.AliOSSUtils;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;

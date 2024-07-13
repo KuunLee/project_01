@@ -3,8 +3,8 @@ package com.kli.service.impl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.kli.mapper.EmpMapper;
-import com.kli.pojo.Emp;
-import com.kli.pojo.PageBean;
+import com.kli.dbo.Emp;
+import com.kli.dbo.PageBean;
 import com.kli.qo.EmpQO;
 import com.kli.service.EmpService;
 import jakarta.annotation.Resource;
@@ -13,10 +13,8 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 @Slf4j

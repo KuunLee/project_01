@@ -3,8 +3,8 @@ package com.kli.service.impl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.kli.mapper.ClazzMapper;
-import com.kli.pojo.Clazz;
-import com.kli.pojo.PageBean;
+import com.kli.dbo.Clazz;
+import com.kli.dbo.PageBean;
 import com.kli.service.clazzService;
 import jakarta.annotation.Resource;
 import org.apache.commons.collections4.CollectionUtils;
@@ -19,7 +19,7 @@ public class clazzServiceImpl implements clazzService {
     private ClazzMapper clazzMapper;
     @Override
     public boolean insert(Clazz clazz) {
-        Clazz clz = queryClassGrade(clazz.getClassRank(),clazz.getGrade());
+        List<Clazz> clz = queryByClassGrade(clazz.getClassRank(),clazz.getGrade());
         if(clz != null) return false;
         clazz.setCreateTime(LocalDateTime.now());
         clazz.setUpdateTime(LocalDateTime.now());
@@ -34,10 +34,10 @@ public class clazzServiceImpl implements clazzService {
 
     @Override
     public boolean update(Clazz clazz) {
-        Clazz clz = queryClassGrade(clazz.getClassRank(),clazz.getGrade());
-        if(clz != null){
-            if(clazz.getId().compareTo(clz.getId()) != 0) return false;
-        }
+        List<Clazz> clz = queryByClassGrade(clazz.getClassRank(),clazz.getGrade());
+//        if(clz != null){
+//            if(clazz.getId().compareTo(clz.getId()) != 0) return false;
+//        }
         clazz.setUpdateTime(LocalDateTime.now());
         clazzMapper.update(clazz);
         return true;
@@ -72,7 +72,7 @@ public class clazzServiceImpl implements clazzService {
         return clazzMapper.queryById(id);
     }
 
-    private Clazz queryClassGrade(Short classRank, Short grade) {
-        return clazzMapper.queryClassGrade(classRank,grade);
+    private List<Clazz> queryByClassGrade(Short classRank, Short grade) {
+        return clazzMapper.queryByClassGrade(classRank,grade);
     }
 }

@@ -1,7 +1,7 @@
 package com.kli.mapper;
 
-import com.kli.pojo.Student;
-import org.apache.ibatis.annotations.Delete;
+import com.kli.dbo.Student;
+import com.kli.vo.StudentVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -10,8 +10,8 @@ import java.util.List;
 
 @Mapper
 public interface StudentMapper {
-    List<Student> queryList(String name, Short gender, Short grade, Short clazz,
-                            LocalDate begin,LocalDate end,String headTeacherName);
+    List<StudentVO> queryList(String name, Short gender, Short classRank, Short grade,
+                              LocalDate begin, LocalDate end, String headTeacherName);
 
     void deleteByIds(List<Integer> ids);
 

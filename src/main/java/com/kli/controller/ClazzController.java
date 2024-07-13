@@ -1,8 +1,8 @@
 package com.kli.controller;
 
-import com.kli.pojo.Clazz;
-import com.kli.pojo.PageBean;
-import com.kli.pojo.Result;
+import com.kli.dbo.Clazz;
+import com.kli.dbo.PageBean;
+import com.kli.dbo.Result;
 import com.kli.service.clazzService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;

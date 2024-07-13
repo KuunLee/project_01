@@ -1,6 +1,6 @@
 package com.kli.qo;
 
-import com.kli.pojo.Dept;
+import com.kli.dbo.Dept;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

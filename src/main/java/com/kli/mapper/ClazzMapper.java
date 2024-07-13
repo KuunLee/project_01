@@ -1,6 +1,6 @@
 package com.kli.mapper;
 
-import com.kli.pojo.Clazz;
+import com.kli.dbo.Clazz;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -19,6 +19,7 @@ public interface ClazzMapper {
     @Select("select * from clazz where id = #{id}")
     Clazz queryById(Integer id);
 
-    @Select("select * from clazz where class_rank = #{classRank} and grade = #{grade}")
-    Clazz queryClassGrade(Short classRank, Short grade);
+    List<Clazz> queryByClassGrade(Short classRank, Short grade);
+
+     List<Clazz> queryByIds(List<Integer> ids);
 }

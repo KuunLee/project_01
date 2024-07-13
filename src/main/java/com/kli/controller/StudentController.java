@@ -1,12 +1,12 @@
 package com.kli.controller;
 
-import com.kli.pojo.PageBean;
-import com.kli.pojo.Result;
-import com.kli.pojo.Student;
+import com.kli.dbo.PageBean;
+import com.kli.dbo.Result;
+import com.kli.dbo.Student;
 import com.kli.service.StudentService;
+import com.kli.vo.StudentVO;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +22,7 @@ public class StudentController {
     private StudentService studentService;
 
     @PostMapping
-    public Result save(@RequestBody Student student){
+    public Result save(@RequestBody StudentVO student){
         //参数校验
         if(student == null){
             log.error("数据为空：{}",student);
@@ -37,14 +37,18 @@ public class StudentController {
             return Result.error("性别不能为空");
         }
         else if(student.getGrade() == null){
-            log.error("年级不能为空：{}",student);
-            return Result.error("年级不能为空");
-        }
-        else if(student.getClazz() == null){
             log.error("班级不能为空：{}",student);
             return Result.error("班级不能为空");
         }
-        studentService.insert(student);
+        else if(student.getClassRank() == null){
+            log.error("年级不能为空：{}",student);
+            return Result.error("年级不能为空");
+        }
+        boolean res = studentService.insert(student);
+        if(!res){
+            log.error("班级不存在,参数为：{}",student);
+            return Result.error("班级不存在");
+        }
         return Result.success();
     }
 
@@ -59,25 +63,29 @@ public class StudentController {
     }
 
     @PutMapping
-    public Result update(@RequestBody Student student){
-        studentService.update(student);
+    public Result update(@RequestBody StudentVO student){
+        boolean res = studentService.update(student);
+        if(!res){
+            log.error("班级不存在,参数为：{}",student);
+            return Result.error("班级不存在");
+        }
         return Result.success();
     }
 
     @GetMapping
     public Result list(String name, Short gender, Short grade,
-                       Short clazz, String headTeacherName,
+                       Short classRank, String headTeacherName,
                        @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate begin,
                        @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate end,
                        @RequestParam(defaultValue = "1") Integer page,
                        @RequestParam(defaultValue = "10") Integer pageSize){
-        PageBean res = studentService.list(name,gender,grade,clazz,headTeacherName,begin,end,page,pageSize);
+        PageBean res = studentService.list(name,gender,grade,classRank,headTeacherName,begin,end,page,pageSize);
         return Result.success(res);
     }
 
     @GetMapping("/{id}")
     public Result queryInfoById(@PathVariable Integer id){
-        Student student = studentService.queryById(id);
+        StudentVO student = studentService.queryById(id);
         return Result.success(student);
     }
 }

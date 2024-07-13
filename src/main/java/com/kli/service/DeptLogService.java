@@ -1,6 +1,6 @@
 package com.kli.service;
 
-import com.kli.pojo.DeptLog;
+import com.kli.dbo.DeptLog;
 
 public interface DeptLogService {
     void insert(DeptLog deptLog);

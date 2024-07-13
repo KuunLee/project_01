@@ -1,6 +1,6 @@
 package com.kli.mapper;
 
-import com.kli.pojo.Emp;
+import com.kli.dbo.Emp;
 import com.kli.qo.EmpQO;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;

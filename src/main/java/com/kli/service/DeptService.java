@@ -1,6 +1,6 @@
 package com.kli.service;
 
-import com.kli.pojo.Dept;
+import com.kli.dbo.Dept;
 import java.util.List;
 
 public interface DeptService {

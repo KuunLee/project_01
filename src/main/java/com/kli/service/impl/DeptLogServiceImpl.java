@@ -1,7 +1,7 @@
 package com.kli.service.impl;
 
 import com.kli.mapper.DeptLogMapper;
-import com.kli.pojo.DeptLog;
+import com.kli.dbo.DeptLog;
 import com.kli.service.DeptLogService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package com.kli.pojo;
+package com.kli.dbo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

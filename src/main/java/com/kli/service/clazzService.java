@@ -1,7 +1,7 @@
 package com.kli.service;
 
-import com.kli.pojo.Clazz;
-import com.kli.pojo.PageBean;
+import com.kli.dbo.Clazz;
+import com.kli.dbo.PageBean;
 
 import java.util.List;
 

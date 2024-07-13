@@ -1,8 +1,7 @@
 package com.kli.controller;
 
-import cn.hutool.core.lang.Assert;
-import com.kli.pojo.Dept;
-import com.kli.pojo.Result;
+import com.kli.dbo.Dept;
+import com.kli.dbo.Result;
 import com.kli.service.DeptService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;

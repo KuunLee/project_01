@@ -1,4 +1,4 @@
-package com.kli.pojo;
+package com.kli.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,12 +10,12 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Student {
+public class StudentVO {
     private Integer id;
     private String name;
-    private Short grade;
     private Short gender;
-    private Short clazz;
+    private Short classRank;
+    private Short grade;
     private LocalDate admissionDate;
     private String headTeacherName;
     private LocalDateTime createTime;

@@ -1,12 +1,11 @@
 package com.kli.interceptor;
 
 import com.alibaba.fastjson.JSONObject;
-import com.kli.pojo.Result;
+import com.kli.dbo.Result;
 import com.kli.util.JwtUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;

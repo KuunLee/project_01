@@ -1,10 +1,9 @@
 package com.kli.service.impl;
 
-import com.kli.mapper.DeptLogMapper;
 import com.kli.mapper.DeptMapper;
 import com.kli.mapper.EmpMapper;
-import com.kli.pojo.Dept;
-import com.kli.pojo.DeptLog;
+import com.kli.dbo.Dept;
+import com.kli.dbo.DeptLog;
 import com.kli.service.DeptLogService;
 import com.kli.service.DeptService;
 import jakarta.annotation.Resource;

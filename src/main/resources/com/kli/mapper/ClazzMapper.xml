@@ -47,16 +47,35 @@
         </where>
     </delete>
 
-    <select id="query" resultType="com.kli.pojo.Clazz">
+    <select id="query" resultType="com.kli.dbo.Clazz">
         select * from clazz
         <where>
             <if test="classRank != null">
                 class_rank = #{classRank}
             </if>
             <if test="headTeacherName != null and headTeacherName != ''">
-                and head_teacher_name = #{headTeacherName}
+                and head_teacher_name like concat('%',#{headTeacherName},'%')
             </if>
         </where>
         order by update_time desc
+    </select>
+    <select id="queryByIds" resultType="com.kli.dbo.Clazz">
+        select * from clazz
+        <where>
+            id in
+            <foreach collection="ids" item="id" separator="," open="(" close=")"></foreach>
+        </where>
+    </select>
+
+    <select id="queryByClassGrade">
+        select * from clazz
+        <where>
+            <if test="classRank != null">
+                class_rank = #{classRank}
+            </if>
+            <if test="grade != null">
+                and grade = #{grade}
+            </if>
+        </where>
     </select>
 </mapper>

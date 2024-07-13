@@ -1,7 +1,7 @@
 package com.kli.service;
 
-import com.kli.pojo.Emp;
-import com.kli.pojo.PageBean;
+import com.kli.dbo.Emp;
+import com.kli.dbo.PageBean;
 import com.kli.qo.EmpQO;
 
 import java.time.LocalDate;

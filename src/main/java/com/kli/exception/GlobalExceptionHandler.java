@@ -1,6 +1,6 @@
 package com.kli.exception;
 
-import com.kli.pojo.Result;
+import com.kli.dbo.Result;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 

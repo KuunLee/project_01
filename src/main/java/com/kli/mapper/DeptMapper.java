@@ -1,6 +1,6 @@
 package com.kli.mapper;
 
-import com.kli.pojo.Dept;
+import com.kli.dbo.Dept;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 

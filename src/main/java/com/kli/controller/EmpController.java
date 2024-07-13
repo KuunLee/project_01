@@ -1,8 +1,8 @@
 package com.kli.controller;
 
-import com.kli.pojo.Emp;
-import com.kli.pojo.PageBean;
-import com.kli.pojo.Result;
+import com.kli.dbo.Emp;
+import com.kli.dbo.PageBean;
+import com.kli.dbo.Result;
 import com.kli.qo.EmpQO;
 import com.kli.service.EmpService;
 import jakarta.annotation.Resource;

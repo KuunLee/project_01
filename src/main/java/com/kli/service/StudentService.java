@@ -1,22 +1,23 @@
 package com.kli.service;
 
-import com.kli.pojo.PageBean;
-import com.kli.pojo.Student;
+import com.kli.dbo.PageBean;
+import com.kli.dbo.Student;
+import com.kli.vo.StudentVO;
 
 import java.time.LocalDate;
 import java.util.List;
 
 
 public interface StudentService {
-    PageBean list(String name, Short gender, Short grade,Short clazz,
+    PageBean list(String name, Short gender, Short grade,Short classRank,
                   String headTeacherName, LocalDate begin,LocalDate end,
                   Integer page, Integer pageSize);
 
     boolean deleteByIds(List<Integer> ids);
 
-    void update(Student student);
+    boolean update(StudentVO student);
 
-    void insert(Student student);
+    boolean insert(StudentVO student);
 
-    Student queryById(Integer id);
+    StudentVO queryById(Integer id);
 }

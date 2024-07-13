@@ -4,34 +4,26 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kli.mapper.StudentMapper">
     <sql id="querySql">
-        select id,name,gender,grade,clazz,admission_date,head_teacher_name,create_time,update_time from student
+        select id,name,gender,admission_date,class_id,create_time,update_time from student
     </sql>
     <insert id="insert">
         insert into student (
         name,
         gender,
-        grade,
-        clazz,
         <if test="admissionDate != null">
             admission_date,
         </if>
-        <if test="headTeacherName != null">
-            head_teacher_name,
-        </if>
+        class_id,
         create_time,
         update_time
         )
         values(
         #{name},
         #{gender},
-        #{grade},
-        #{clazz},
         <if test="admissionDate != null">
             #{admissionDate},
         </if>
-        <if test="headTeacherName != null">
-            #{headTeacherName},
-        </if>
+        #{classId},
         #{createTime},
         #{updateTime}
         )
@@ -45,18 +37,10 @@
             <if test="gender != null">
                 gender = #{gender},
             </if>
-            <if test="grade != null">
-                grade = #{grade},
-            </if>
-            <if test="clazz != null">
-                clazz = #{clazz},
-            </if>
             <if test="admissionDate != null">
                 admission_date = #{admissionDate},
             </if>
-            <if test="headTeacherName != null and headTeacherName != ''">
-                head_teacher_name = #{headTeacherName}
-            </if>
+            class_id = #{classId},
             update_time = #{updateTime}
         </set>
         where id = #{id}
@@ -72,30 +56,32 @@
     </delete>
 
     <select id="queryList">
-        <include refid="querySql"></include>
+           select t1.id,t1.name,t1.gender,t1.admission_date,t2.class_rank,t2.grade,t2.head_teacher_name,t1.create_time,t1.update_time from student t1 left join clazz t2 on t1.class_id = t2.id
         <where>
             <if test="name != null and name != ''">
-                name like concat('%',#{name},'%')
+                t1.name like concat('%',#{name},'%')
             </if>
             <if test="gender != null">
-                and gender = #{gender}
+                and t1.gender = #{gender}
+            </if>
+            <if test="classRank != null">
+                and t1.class_id in
+                (select id from clazz where class_rank = #{classRank})
             </if>
             <if test="grade != null">
-                and grade = #{grade}
-            </if>
-            <if test="clazz != null">
-                and clazz = #{clazz}
+                and t1.class_id in
+                (select id from clazz where grade = #{grade})
             </if>
             <if test="begin != null and end != null">
-                and admission_date between #{begin} and #{end}
+                and t1.admission_date between #{begin} and #{end}
             </if>
             <if test="begin == null and end != null">
-                and admission_date &lt;= #{end}
+                and t1.admission_date &lt;= #{end}
             </if>
             <if test="begin != null and end == null">
-                and admission_date >= #{begin}
+                and t1.admission_date >= #{begin}
             </if>
         </where>
-        order by update_time desc
+        order by t1.update_time desc
     </select>
 </mapper>
