@@ -10,6 +10,7 @@ import com.kli.dbo.Student;
 import com.kli.service.StudentService;
 import com.kli.vo.StudentVO;
 import jakarta.annotation.Resource;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Service
 public class StudentServiceImpl implements StudentService {
     @Resource
@@ -44,6 +46,7 @@ public class StudentServiceImpl implements StudentService {
             pageBean.setTotal((long)0);
             pageBean.setRows(studentVOList);
         }
+
         Page res = (Page) studentVOList;
         pageBean.setTotal(res.getTotal());
         pageBean.setRows(res.getResult());
@@ -64,8 +67,10 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public boolean update(StudentVO student) {
+        //判断班级是否存在
         List<Clazz> clazz = clazzMapper.queryByClassGrade(student.getClassRank(), student.getGrade());
         if(CollectionUtils.isEmpty(clazz)) return false;
+
         Student stu = new Student();
         stu.setName(student.getName());
         stu.setGender(student.getGender());
@@ -80,14 +85,16 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public boolean insert(StudentVO student) {
         Student stu = new Student();
-        List<Clazz> clazz = clazzMapper.queryByClassGrade(student.getClassRank(), student.getGrade());
-        if(CollectionUtils.isEmpty(clazz)) return false;
+        //检查班级是否存在
+        List<Clazz> classes = clazzMapper.queryByClassGrade(student.getClassRank(), student.getGrade());
+        if(CollectionUtils.isEmpty(classes)) return false;
+
         stu.setName(student.getName());
         stu.setGender(student.getGender());
         stu.setAdmissionDate(student.getAdmissionDate());
         stu.setCreateTime(LocalDateTime.now());
         stu.setUpdateTime(LocalDateTime.now());
-        stu.setClassId(clazz.get(0).getId());
+        stu.setClassId(classes.get(0).getId());
         studentMapper.insert(stu);
         return true;
     }
@@ -96,7 +103,14 @@ public class StudentServiceImpl implements StudentService {
     public StudentVO queryById(Integer id) {
         Student student = studentMapper.queryById(id);
         if(student == null) return null;
+        //查询班级的信息
         Clazz clazz = clazzMapper.queryById(student.getClassId());
+        if(clazz == null){
+            log.error("通过班级id未查询到班级信息，班级id为：{}",student.getClassId());
+            return null;
+        }
+
+        //将DBO对象转换为VO对象
         StudentVO studentVO = new StudentVO();
         studentVO.setId(id);
         studentVO.setName(student.getName());
@@ -110,6 +124,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     private List<StudentVO> transferStudent(List<Student> students) {
+        //转换为StudentVO对象
         List<StudentVO> studentVOList = new ArrayList<>();
         students.forEach(student -> {
             StudentVO studentVO = new StudentVO();
@@ -124,6 +139,7 @@ public class StudentServiceImpl implements StudentService {
             studentVO.setGrade(clazz.getGrade());
             studentVOList.add(studentVO);
         });
+
         return studentVOList;
     }
 }

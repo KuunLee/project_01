@@ -21,4 +21,6 @@ public interface StudentMapper {
 
     @Select("select * from student where id = #{id}")
     Student queryById(Integer id);
+
+    void deleteByClassIds(List<Integer> ids);
 }

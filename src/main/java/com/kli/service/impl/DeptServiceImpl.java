@@ -53,7 +53,6 @@ public class DeptServiceImpl implements DeptService {
     @Override
     public boolean delete(Integer id) {
         Dept dept = queryById(id);
-
         if (dept == null) {
             return false;
         }

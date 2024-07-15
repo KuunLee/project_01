@@ -54,6 +54,12 @@
             </foreach>
         </where>
     </delete>
+    <delete id="deleteByClassIds">
+        delete from student where class_id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
 
     <select id="queryList">
            select t1.id,t1.name,t1.gender,t1.admission_date,t2.class_rank,t2.grade,t2.head_teacher_name,t1.create_time,t1.update_time from student t1 left join clazz t2 on t1.class_id = t2.id

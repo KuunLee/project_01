@@ -86,6 +86,9 @@ public class StudentController {
     @GetMapping("/{id}")
     public Result queryInfoById(@PathVariable Integer id){
         StudentVO student = studentService.queryById(id);
+        if(student == null){
+            return Result.error("数据不存在或班级信息异常，请检查");
+        }
         return Result.success(student);
     }
 }

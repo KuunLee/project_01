@@ -86,6 +86,10 @@ public class ClazzController {
 
     @GetMapping("/{id}")
     public Result queryInfoById(@PathVariable Integer id){
+        if(id == null){
+            log.error("参数为空");
+            return Result.error("参数有误");
+        }
         Clazz clazz = clazzService.queryInfoById(id);
         return Result.success(clazz);
     }

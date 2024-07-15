@@ -35,7 +35,7 @@
         delete from dept where id = #{id}
     </delete>
 
-    <select id="query" resultType="com.kli.pojo.Dept">
+    <select id="query" resultType="com.kli.dbo.Dept">
         <include refid="querySql"/>
         <where>
             <if test="id != null">
@@ -47,7 +47,7 @@
         </where>
         order by update_time desc
     </select>
-    <select id="queryById" resultType="com.kli.pojo.Dept">
+    <select id="queryById" resultType="com.kli.dbo.Dept">
         <include refid="querySql"/>
         where id = #{id}
     </select>

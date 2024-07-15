@@ -91,7 +91,7 @@
     </delete>
 
 <!--    查询员工-->
-    <select id="query" resultType="com.kli.pojo.Emp">
+    <select id="query" resultType="com.kli.dbo.Emp">
         <include refid="querySql"/>
         <where>
             <if test="id != null">
@@ -117,7 +117,7 @@
     </select>
 
 <!--    条件分页查询-->
-    <select id="list" resultType="com.kli.pojo.Emp">
+    <select id="list" resultType="com.kli.dbo.Emp">
         <include refid="querySql"/>
         <where>
             <if test="name != null and name != ''">
@@ -140,7 +140,7 @@
     </select>
 
 <!--    分页查询带所有条件-->
-    <select id="queryPaging" resultType="com.kli.pojo.Emp">
+    <select id="queryPaging" resultType="com.kli.dbo.Emp">
         <include refid="querySql"></include>
         <where>
             <if test="data.id != null">
